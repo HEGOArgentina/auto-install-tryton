@@ -1,3 +1,29 @@
+#! /bin/bash
+
+############################
+# Instalación del Servidor, Modulos y Cliente 
+
+cd /etc/apt && wget http://debian.tryton.org/debian/debian.tryton.org-archive.asc && apt-key add debian.tryton.org-archive.asc
+
+echo "deb http://debian.tryton.org/debian/ wheezy-3.2 main" >> /etc/apt/sources.list
+
+cd /etc/apt/sources.list.d && wget http://debian.tryton.org/debian/tryton-wheezy-3.2.list
+
+apt-get update
+apt-get -y install tryton-server -t wheezy-3.2
+apt-get -y install tryton-modules-all -t wheezy-3.2
+apt-get -y install tryton-client -t wheezy-3.2
+cd /etc/apt/preferences.d && wget http://debian.tryton.org/debian/debian.tryton.org.pref
+apt-get update && apt-get dist-upgrade
+
+############################
+# Instalamos la herramienta git para bajar archivos del repositorio
+
+apt-get -y install git
+
+############################
+# Configuración de la Base de Datos
+
 /etc/init.d/postgresql* restart
 
 cd
@@ -58,3 +84,5 @@ rm -r /usr/lib/python2.7/dist-packages/trytond/modules/11-modulos-ar
 ############################
 
 exit
+
+
