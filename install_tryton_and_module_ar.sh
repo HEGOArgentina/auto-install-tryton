@@ -20,29 +20,26 @@ apt-get install git
 cd
 su - postgres -c "createuser --createdb --no-createrole --no-superuser \
         --pwprompt tryton"
-su - postgres -c "createdb --encoding=UNICODE --owner=tryton tryton"
-
-/etc/init.d/postgresql* restart
 /etc/init.d/tryton-server restart
-
+su - postgres -c "createdb --encoding=UNICODE --owner=tryton tryton"
 
 cd /etc/
 rm trytond.conf
 git clone https://github.com/HEGOArgentina/trytond-configuracion
 cd trytond-configuracion && cp trytond.conf /etc/
 
-/etc/init.d/tryton-server restart
-
 /usr/bin/trytond -i all -d tryton
 /usr/bin/trytond -u all -d tryton
+
+/etc/init.d/postgresql* restart
+
+/etc/init.d/tryton-server restart
 
 cd /usr/lib/python2.7/dist-packages/tryton/
 git clone https://github.com/HEGOArgentina/patch-login-tryton
 
-
-
 cd /usr/lib/python2.7/dist-packages/tryton/patch-login-tryton
-cp -R common.py /usr/share/pyshared/tryton/common/common.py 
+cp -R common.py /usr/share/pyshared/tryton/common/common.py
 cp -R dbcreate.py /usr/share/pyshared/tryton/gui/window/dbcreate.py
 cp -R dblogin.py /usr/share/pyshared/tryton/gui/window/dblogin.py
 /etc/init.d/tryton-server restart
@@ -68,4 +65,3 @@ rm -r /usr/lib/python2.7/dist-packages/trytond/modules/11-modulos-ar
 /etc/init.d/tryton-server restart
 
 exit
-
