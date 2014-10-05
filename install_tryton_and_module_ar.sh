@@ -14,7 +14,7 @@ apt-get -y install tryton-server -t wheezy-3.2
 apt-get -y install tryton-modules-all -t wheezy-3.2
 apt-get -y install tryton-client -t wheezy-3.2
 cd /etc/apt/preferences.d && wget http://debian.tryton.org/debian/debian.tryton.org.pref
-apt-get update && apt-get dist-upgrade
+apt-get update && apt-get -y dist-upgrade
 
 ############################
 # Instalamos la herramienta git para bajar archivos del repositorio
